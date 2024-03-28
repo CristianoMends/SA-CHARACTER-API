@@ -1,0 +1,14 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sa_characters_db
+    username: postgres
+    password: cristiano1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    flyway:
+      locations: classpath:db/migration
+      baseline-on-migrate: true
