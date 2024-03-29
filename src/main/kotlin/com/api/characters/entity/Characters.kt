@@ -11,7 +11,7 @@ data class Character(
     @Column(name = "character_id", nullable = false)
     var id: Long? = null,
     var name:String? = null,
-    var OtherNames:String? = null,
+    var otherNames:String? = null,
     var gender:String? = Gender.UNKNOWN.toString(),
     var description:String? = null,
     var image: String? = null//for urls
