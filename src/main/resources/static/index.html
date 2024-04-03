@@ -3,155 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GTA San Andreas API</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <h2>Teste de cadastro</h2>
-        <form id="form">
-            <div class="container">
-                <label for="name">Nome:</label>
-                <input type="text" id="name">
-                <label for="otherNames">Outros Nomes:</label>
-                <input type="text" name="otherNames" id="otherNames">
-                <label for="gender">Gênero:</label>
-                <input type="text" id="gender">
-                <label for="description">Descrição:</label>
-                <input type="text" id="description">
-                <label for="image">Imagem:</label>
-                <input type="file" name="image" id="image" accept=".jpg">
-            </div>
-            <input type="submit" value="Criar">
-        </form>
-    </div>
-    <div>
-        <h2>Teste de obter</h2>
+    <header>
         <div>
-            <input type="button" value="Atualizar" onclick="getCharacters()">
-            <input type="button" value="Anterior" onclick="previousPage()">
-            <input type="button" value="Próxima" onclick="nextPage()">
-            <div id="charactersList">
-
-            </div>
+            <img class="logo" src="images/logo.png" alt="" width="50px" height="50px">
         </div>
-    </div>
-    <script>
-        document.getElementById('form').addEventListener('submit', function(event) {
-            event.preventDefault();
+        <nav>
+            <button>Docs</button>
+            <button>About</button>
+        </nav>
+    </header>
+    <main>
+        <header class="background">
+            <h1 class="f2">
+                <span class="f1">Grand Theft Auto <br>
+                </span> San Andreas <br>
+                <span class="f1">API</span>
+            </h1>
+        </header>
+        <section class="get">
+            <div id="charactersList" class="containerCharacter"></div>
+        </section>
+        <section class="register" style="display: none;">
+            <h2>Teste de cadastro</h2>
+            <form id="form">
+                <div class="container">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name">
+                    <label for="otherNames">Outros Nomes:</label>
+                    <input type="text" name="otherNames" id="otherNames">
+                    <label for="gender">Gênero:</label>
+                    <input type="text" id="gender">
+                    <label for="description">Descrição:</label>
+                    <input type="text" id="description">
+                    <label for="image">Imagem:</label>
+                    <input type="file" name="image" id="image" accept=".jpg">
+                </div>
+                <input type="submit" value="Criar">
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Personagens: 100</p>
 
-            const formData = new FormData();
-            formData.append('name', document.getElementById('name').value);
-            formData.append('otherNames', document.getElementById('otherNames').value);
-            formData.append('gender', document.getElementById('gender').value);
-            formData.append('description', document.getElementById('description').value);
-            formData.append('image', document.getElementById('image').files[0]);
+    </footer>
 
-            fetch('/api/characters/save', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Cadastro realizado com sucesso!');
-                } else {
-                    alert('Erro ao cadastrar!');
-                }
-            })
-            .catch(error => console.error('Erro ao criar personagem!', error));
-        });
-        let currentPage = 1;
-        const charactersPerPage = 5;
-
-        function createElementsFromJSON(jsonData) {
-            const charactersList = document.getElementById('charactersList');
-            charactersList.innerHTML = '';
-
-            const startIndex = (currentPage - 1) * charactersPerPage;
-            const endIndex = Math.min(startIndex + charactersPerPage, jsonData.length);
-
-            for (let i = startIndex; i < endIndex; i++) {
-                const character = jsonData[i];
-                const characterDiv = document.createElement('div');
-                characterDiv.innerHTML = `
-                    <img src="${character.image}" alt="Imagem do Personagem ${character.name}">
-                    <h3>${character.name}</h3>
-                    <p><strong>Outros Nomes:</strong> ${character.otherNames}</p>
-                    <p><strong>Gênero:</strong> ${character.gender}</p>
-                    <p><strong>Descrição:</strong> ${character.description}</p>
-                `;
-                charactersList.appendChild(characterDiv);
-            };
-        }
-        function getCharacters(){
-            fetch('/api/characters/all')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao receber os dados.');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Dados recebidos:', data);
-                    createElementsFromJSON(data);
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-            });
-        }
-        function nextPage() {
-            currentPage++;
-            getCharacters();
-        }
-
-        function previousPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                getCharacters();
-            }
-        }
-    </script>
-        <style>
-
-            body, html{
-                margin: 0;
-    
-            }
-            form{
-                background-color: gray;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 5px;
-                padding: 5%;
-            }
-            .container{
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                width: 50%;
-            }
-            #charactersList{
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-            }
-            #charactersList div{
-                width: 200px;
-                height: 300px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 10px;
-                margin: 5px;
-                border-radius: 3px;
-                background-color: gray;
-                border: 1px solid black;
-            }
-            #charactersList div img{
-                width: 50%;
-            }
-        </style>
+    <script src="app.js"></script>
 </body>
 </html>

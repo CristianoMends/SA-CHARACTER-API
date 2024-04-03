@@ -17,7 +17,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 @RestController
-@RequestMapping("/api/characters")
+@RequestMapping("/api/character")
 class CharacterController(
     val characterService: CharacterService
 ){
