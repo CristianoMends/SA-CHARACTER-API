@@ -1,8 +1,11 @@
 HELP.md
 .gradle
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!build/libs/sa-characters-api-0.0.1-SNAPSHOT-plain.jar
+
+build/classes
+build/kotlin
+build/resources
+build/snapshot
+build/tmp
 !**/src/main/**/build/
 !**/src/test/**/build/
 
