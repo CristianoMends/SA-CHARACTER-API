@@ -3,8 +3,16 @@
     src: url('font/diploma.ttf') format('opentype');
 }
 @font-face {
+    font-family: 'Ginerin';
+    src: url('font/Ginerin-Regular.otf') format('opentype');
+}
+@font-face {
     font-family: 'FonteGta2';
     src: url('font/pricedown\ bl.otf') format('opentype');
+}
+@font-face {
+    font-family: 'RifficFree';
+    src: url('font/RifficFree-Bold.ttf') format('opentype');
 }
 
 .f2{
@@ -57,12 +65,14 @@ header{
 main{
     display: flex;
     flex-direction: column;
+    font-family: Ginerin;
 }
 main header{
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid;
     padding: 10px;
+    font-size: x-large;
 }
 .text-shadow{
     text-shadow: -1px -1px 0 #fff,  
@@ -89,39 +99,90 @@ form{
     padding: 20px;
     background-color: rgb(20, 20, 20);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 .characterDiv{
-    width: 250px;
+    width: 25%;
+    height: 300px;
     display: flex;
     border: 1px solid rgb(49, 49, 49);
     background-color: rgba(141, 138, 138, 0.299);
     margin: 5px;
-    border-radius: 5px;
-    padding: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: rgb(252, 250, 250);
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
 }
 .characterDiv img{
-    max-height: 250px;
-    padding: 10px;
+    height: 100%;
+}
+.text-title{
+    font-weight: bold;
 }
 .infoDiv{
     color: aliceblue;
     text-align: center;
-    padding: 5px;
+    width: 50%;
+    padding: 15px;
 }
-.infoDiv strong{
-    color: black;
-    font-size: large;
-    font-family: FonteGta2;
+.infoDiv span{
+    font-size: small;
+    color: dimgrey;
 }
 .infoDiv p{
+    font-family: RifficFree;
     text-align: start;
 }
 footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 200px;
     background-color: rgb(1, 1, 1);
     color: white;
     position: static;
     bottom: 0;
+    color: rgba(240, 248, 255, 0.525);
+}
+footer nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+footer p a{
+    color: rgb(180, 1, 1);
+}
+footer p a:hover{
+    color: rgb(255, 0, 0);
+    text-decoration: none;    
+}
+footer nav a{
+    color: rgba(240, 248, 255, 0.525);
+}
+
+@media(max-width: 574px) {
+    .image-container img{
+        height: 100%;
+        width: 100%;
+    }
+    .characterDiv{
+        width: 100%;        
+    }
+    main{
+        font-size: smaller;
+    }
+    main header{
+        font-size: medium;
+    }
 }

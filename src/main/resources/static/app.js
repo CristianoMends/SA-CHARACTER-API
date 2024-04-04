@@ -36,13 +36,15 @@ function showCharacters(jsonData) {
         const characterDiv = document.createElement('div');
         characterDiv.classList.add('characterDiv');
         characterDiv.innerHTML = `
-            <img src="${character.image}" alt="Imagem do Personagem ${character.name}">
+            <div class="image-container">
+                <img src="${character.image}" alt="Imagem do Personagem ${character.name}">
+            </div>
             <div class="infoDiv">
-            <h3>${character.name}</h3>
+            <h3 class="text-title">${character.name}</h3>
             <p>
-                <strong>Outros Nomes:</strong> ${character.otherNames} <br>
-                <strong>Gênero:</strong> ${character.gender}<br>
-                <strong>Descrição:</strong><br> ${character.description}
+                <span>Outros Nomes:</span> <br> ${character.otherNames} <br>
+                <span>Gênero:</span><br> ${character.gender}<br>
+                <span>Descrição:</span><br> ${character.description}
             </p>
             </div>
         `;
@@ -50,7 +52,7 @@ function showCharacters(jsonData) {
     };
 }
 function getCharacters(){
-    data = 
+    /*data = 
     [
     {
         "name":"Carls Jonhoson",
@@ -61,9 +63,9 @@ function getCharacters(){
     },
     {
         "name":"Carls Jonhoson",
-        "otherNames":"Cj",
+        "otherNames":"Cj, sds,sds,sd",
         "gender":"Male",
-        "description":"agaragan",
+        "description":"agaragan sdasda sd asd asda sd asda sdasdasdasd asdasdasdasd",
         "image":"images/Carl_Jonhson.jpg"
     },
     {
@@ -81,9 +83,9 @@ function getCharacters(){
         "image":"images/Carl_Jonhson.jpg"
     }
     ]
-    showCharacters(data);
+    showCharacters(data);*/
 
-    /*fetch('/api/character/all')
+    fetch('http://localhost:8080/api/character/all')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao receber os dados.');
@@ -92,11 +94,13 @@ function getCharacters(){
         })
         .then(data => {
             console.log('Dados recebidos:', data);
+            const numberOfCharacters = data.length;
+            document.getElementById('charactersQtd').innerText += ` ${numberOfCharacters}`;
             showCharacters(data);
         })
         .catch(error => {
             console.error('Erro:', error);
-    });*/
+    });
 }
 function nextPage() {
     currentPage++;
