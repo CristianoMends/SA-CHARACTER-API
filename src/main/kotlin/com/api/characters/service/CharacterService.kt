@@ -16,6 +16,15 @@ class CharacterService(
 
         val imagesDir = Paths.get("uploads/images")
 
+        if (!Files.exists(imagesDir)) {
+            try {
+                Files.createDirectories(imagesDir)
+            } catch (e: IOException) {
+                e.printStackTrace()
+                throw Exception("Failed to create upload directory!")
+            }
+        }
+
         val characterName = character.name?.replace("\\s".toRegex(), "_")
         val filePath = imagesDir.resolve("$characterName.jpg")
 
