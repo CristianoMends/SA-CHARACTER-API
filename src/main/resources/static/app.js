@@ -72,51 +72,6 @@ function showCharacters(jsonData) {
     };
 }
 function getCharacters(){
-   /* data = 
-    [{
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj",
-        "gender":"Male",
-        "description":"agaragan",
-        "image":"images/Carl_Jonhson.jpg"
-    },{
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj",
-        "gender":"Male",
-        "description":"agaragan",
-        "image":"images/Carl_Jonhson.jpg"
-    },
-    {
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj",
-        "gender":"Male",
-        "description":"agaragan",
-        "image":"images/Carl_Jonhson.jpg"
-    },
-    {
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj, sds,sds,sd",
-        "gender":"Male",
-        "description":"agaragan sdasda sd asd asda sd asda sdasdasdasd asdasdasdasd",
-        "image":"images/Carl_Jonhson.jpg"
-    },
-    {
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj",
-        "gender":"Male",
-        "description":"agaragan",
-        "image":"images/Carl_Jonhson.jpg"
-    },
-    {
-        "name":"Carls Jonhoson",
-        "otherNames":"Cj",
-        "gender":"Male",
-        "description":"agaragan",
-        "image":"images/Carl_Jonhson.jpg"
-    }
-    ]
-    showCharacters(data);*/
-
     fetch('http://localhost:8080/api/character/all')
         .then(response => {
             if (!response.ok) {
