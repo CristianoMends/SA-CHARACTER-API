@@ -21,39 +21,71 @@ document.getElementById('form').addEventListener('submit', function(event) {
     })
     .catch(error => console.error('Erro ao criar personagem!', error));
 });
-let currentPage = 1;
-const charactersPerPage = 5;
 
 function showCharacters(jsonData) {
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+
+            const aux = array[i];
+            array[i] = array[j];
+            array[j] = aux;
+        }
+        return array;
+    }
+
+    const shuffledData = shuffle(jsonData);
+
     const charactersList = document.getElementById('charactersList');
     charactersList.innerHTML = '';
 
-    const startIndex = (currentPage - 1) * charactersPerPage;
-    const endIndex = Math.min(startIndex + charactersPerPage, jsonData.length);
+    const numberOfCharacters = jsonData.length
+    const charactersMax = 6;
 
-    for (let i = startIndex; i < endIndex; i++) {
-        const character = jsonData[i];
+    
+    for (let i = 0; i < charactersMax; i++) {
+        const character = shuffledData[i];
         const characterDiv = document.createElement('div');
         characterDiv.classList.add('characterDiv');
         characterDiv.innerHTML = `
             <div class="image-container">
-                <img src="${character.image}" alt="Imagem do Personagem ${character.name}">
+                <img src="" alt="Imagem do Personagem ${character.name}">
             </div>
             <div class="infoDiv">
-            <h3 class="text-title">${character.name}</h3>
-            <p>
-                <span>Outros Nomes:</span> <br> ${character.otherNames} <br>
-                <span>Gênero:</span><br> ${character.gender}<br>
-                <span>Descrição:</span><br> ${character.description}
-            </p>
+                <h3 class="text-title">${character.name}</h3>
+                <p>
+                    <span>Outros Nomes:</span> <br> ${character.otherNames} <br>
+                    <span>Gênero:</span><br> ${character.gender}<br>
+                    <span>Descrição:</span><br> ${character.description}
+                </p>
             </div>
         `;
+        const img = characterDiv.querySelector('img');
+        img.classList.add('hidden');
+        setTimeout(() => {
+            img.src = character.image;
+            img.classList.remove('hidden');
+        }, 200);
+
         charactersList.appendChild(characterDiv);
     };
 }
 function getCharacters(){
-    /*data = 
-    [
+   /* data = 
+    [{
+        "name":"Carls Jonhoson",
+        "otherNames":"Cj",
+        "gender":"Male",
+        "description":"agaragan",
+        "image":"images/Carl_Jonhson.jpg"
+    },{
+        "name":"Carls Jonhoson",
+        "otherNames":"Cj",
+        "gender":"Male",
+        "description":"agaragan",
+        "image":"images/Carl_Jonhson.jpg"
+    },
     {
         "name":"Carls Jonhoson",
         "otherNames":"Cj",
