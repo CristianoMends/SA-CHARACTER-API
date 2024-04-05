@@ -23,6 +23,9 @@ document.getElementById('form').addEventListener('submit', function(event) {
 });
 
 function showCharacters(jsonData) {
+    if(jsonData.length == 0){
+        return;
+    }
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -40,17 +43,26 @@ function showCharacters(jsonData) {
     const charactersList = document.getElementById('charactersList');
     charactersList.innerHTML = '';
 
-    const numberOfCharacters = jsonData.length
     const charactersMax = 6;
-
     
     for (let i = 0; i < charactersMax; i++) {
         const character = shuffledData[i];
+
+        console.log(character);
+
         const characterDiv = document.createElement('div');
         characterDiv.classList.add('characterDiv');
+        const img = new Image();
+        img.classList.add('hidden');
+        img.onload = function() {
+            img.classList.remove('hidden');
+        };
+        img.src = character.image;
+        img.alt = `imagem de ${character.name}`;
+
         characterDiv.innerHTML = `
             <div class="image-container">
-                <img src="" alt="Imagem do Personagem ${character.name}">
+
             </div>
             <div class="infoDiv">
                 <h3 class="text-title">${character.name}</h3>
@@ -61,12 +73,7 @@ function showCharacters(jsonData) {
                 </p>
             </div>
         `;
-        const img = characterDiv.querySelector('img');
-        img.classList.add('hidden');
-        setTimeout(() => {
-            img.src = character.image;
-            img.classList.remove('hidden');
-        }, 200);
+        characterDiv.querySelector('.image-container').appendChild(img);
 
         charactersList.appendChild(characterDiv);
     };
@@ -80,25 +87,15 @@ function getCharacters(){
             return response.json();
         })
         .then(data => {
-            console.log('Dados recebidos:', data);
             const numberOfCharacters = data.length;
+            console.log('Number Of Characters:', numberOfCharacters);
+
             document.getElementById('charactersQtd').innerText += ` ${numberOfCharacters}`;
             showCharacters(data);
         })
         .catch(error => {
             console.error('Erro:', error);
     });
-}
-function nextPage() {
-    currentPage++;
-    getCharacters();
-}
-
-function previousPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        getCharacters();
-    }
 }
 
 document.addEventListener('DOMContentLoaded',getCharacters);

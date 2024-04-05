@@ -46,31 +46,9 @@ class CharacterController(
         @RequestParam("description") description: String,
         @RequestParam("image") image: MultipartFile
     ): ResponseEntity<CharacterView> {
-        val imagesDir = Paths.get("src/main/resources/static/images")
 
-        if (!Files.exists(imagesDir)) {
-            try {
-                Files.createDirectories(imagesDir)
-            } catch (e: IOException) {
-                e.printStackTrace()
-                println("Falha ao criar diretório de upload.")
-            }
-        }
-
-        val characterName = name.replace("\\s".toRegex(), "_")
-        val filePath = imagesDir.resolve("$characterName.jpg")
-
-        try {
-            Files.copy(image.inputStream, filePath)
-        } catch (e: IOException) {
-            e.printStackTrace()
-            throw Exception("Fail to salve image.")
-        }
-
-        val imagePath = "images/$characterName.jpg"
-
-        val characterDto:CharacterDto = CharacterDto(name,otherNames,gender,description,imagePath)
-        val savedCharacter = characterService.save(characterDto.toEntity())
+        val characterDto:CharacterDto = CharacterDto(name,otherNames,gender,description)
+        val savedCharacter = characterService.save(characterDto.toEntity(), image)
 
         return ResponseEntity.status(HttpStatus.CREATED).body(CharacterView(savedCharacter))
     }

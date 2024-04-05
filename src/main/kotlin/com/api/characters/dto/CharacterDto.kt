@@ -11,7 +11,7 @@ data class CharacterDto(
     @field:NotEmpty(message = "invalid input") val otherNames:String?,
     @field:NotEmpty(message = "invalid input") val gender:String?,
     @field:NotEmpty(message = "invalid input") val description:String?,
-    @field:NotEmpty(message = "invalid input") val image:String?
+    @field:NotEmpty(message = "invalid input") val image:String? = null
 ){
     fun toEntity(): Character {
         return Character(
