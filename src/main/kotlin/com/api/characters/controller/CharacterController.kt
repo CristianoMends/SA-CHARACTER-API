@@ -3,18 +3,16 @@ package com.api.characters.controller
 import com.api.characters.dto.CharacterDto
 import com.api.characters.dto.CharacterView
 import com.api.characters.service.CharacterService
+import org.springframework.core.io.Resource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.multipart.MultipartFile
-import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.Paths
 
 @RestController
 @RequestMapping("/api/character")
@@ -51,6 +49,21 @@ class CharacterController(
         val savedCharacter = characterService.save(characterDto.toEntity(), image)
 
         return ResponseEntity.status(HttpStatus.CREATED).body(CharacterView(savedCharacter))
+    }
+
+    @GetMapping("/image/{imageName}")
+    fun getImage(@PathVariable imageName: String): ResponseEntity<Resource> {
+        val resource: Resource = characterService.loadImage(imageName)
+
+        return if (resource.exists() && resource.isReadable) {
+
+            ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
+                .body(resource)
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
 
 

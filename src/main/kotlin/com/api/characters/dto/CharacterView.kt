@@ -2,6 +2,8 @@ package com.api.characters.dto
 
 import com.api.characters.entity.Character
 import com.api.characters.enums.Gender
+import java.awt.Image
+import java.io.File
 
 
 data class CharacterView(
@@ -20,7 +22,6 @@ data class CharacterView(
         description = character.description,
         image = character.image
     )
-
 }
 
 

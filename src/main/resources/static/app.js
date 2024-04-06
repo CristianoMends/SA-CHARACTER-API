@@ -57,7 +57,7 @@ function showCharacters(jsonData) {
         img.onload = function() {
             img.classList.remove('hidden');
         };
-        img.src = character.image;
+        img.src = $character.image;
         img.alt = `imagem de ${character.name}`;
 
         characterDiv.innerHTML = `
