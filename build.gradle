@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
+
 plugins {
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
@@ -39,6 +41,22 @@ tasks.withType(KotlinCompile) {
 	}
 }
 
+task('stage').dependsOn(bootJar)
+tasks.stage.dependsOn(bootJar)
+tasks.stage.doLast() {
+	delete fileTree(dir: "build/distributions")
+	delete fileTree(dir: "build/assetCompile")
+	delete fileTree(dir: "build/distributions")
+	delete fileTree(dir: "build/libs", exclude: "*.jar") //delete everything except jar file inside build folder
+}
+
+jar { //Don't package test folders and files
+	exclude "test/**"
+	exclude "test/**/**"
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
