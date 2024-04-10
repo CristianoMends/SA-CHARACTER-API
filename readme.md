@@ -10,7 +10,7 @@
 Em Andamento
 
 ## Descrição do Projeto
-Uma Api Rest para obter informações de personagens do jogo Grand Theft Auto: San Andreas
+Uma Api Rest(Não oficial) para obter dados de personagens do jogo Grand Theft Auto: San Andreas
 
 ## Tecnologias Utilizadas
 
