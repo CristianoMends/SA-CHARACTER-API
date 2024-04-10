@@ -3,7 +3,7 @@ CREATE TABLE character (
    name VARCHAR(255),
    other_names VARCHAR(255),
    gender VARCHAR(255),
-   description VARCHAR(255),
+   description VARCHAR(1000),
    image VARCHAR(255),
    CONSTRAINT pk_character PRIMARY KEY (character_id)
 );

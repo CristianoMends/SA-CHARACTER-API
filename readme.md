@@ -1,3 +1,5 @@
+<img src="capture/img1.png">
+
 # Gta San Andreas API
 
 - [Estado](#estado)

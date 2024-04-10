@@ -13,6 +13,7 @@ data class Character(
     var name:String? = null,
     var otherNames:String? = null,
     var gender:String? = Gender.UNKNOWN.toString(),
+    @Column(length = 1000)
     var description:String? = null,
     var image: String? = null//for urls
 )
