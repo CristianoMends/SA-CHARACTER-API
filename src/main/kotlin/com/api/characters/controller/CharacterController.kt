@@ -2,6 +2,7 @@ package com.api.characters.controller
 
 import com.api.characters.dto.CharacterDto
 import com.api.characters.dto.CharacterView
+import com.api.characters.entity.Character
 import com.api.characters.service.CharacterService
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpHeaders
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/character")
 class CharacterController(
     val characterService: CharacterService
 ){
@@ -36,7 +37,7 @@ class CharacterController(
         return ResponseEntity.status(HttpStatus.OK).body(charactersViews)
     }
 
-    @PostMapping("/save")
+    @PostMapping("/")
     fun createCharacter(
         @RequestParam("name") name: String,
         @RequestParam("otherNames") otherNames: String,
@@ -65,6 +66,7 @@ class CharacterController(
             ResponseEntity.notFound().build()
         }
     }
+
 
 
 }

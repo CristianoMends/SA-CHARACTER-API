@@ -1,27 +1,3 @@
-/*document.getElementById('form').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('name', document.getElementById('name').value);
-    formData.append('otherNames', document.getElementById('otherNames').value);
-    formData.append('gender', document.getElementById('gender').value);
-    formData.append('description', document.getElementById('description').value);
-    formData.append('image', document.getElementById('image').files[0]);
-
-    fetch('/api/character/save', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('Cadastro realizado com sucesso!');
-            } else {
-                alert('Erro ao cadastrar!');
-            }
-        })
-        .catch(error => console.error('Erro ao criar personagem!', error));
-});
-*/
 
 function createCharacterElement(character){
 
@@ -53,7 +29,7 @@ function createCharacterElement(character){
     return characterElement;
 }
 function getCharacters() {
-    fetch('http://localhost:8080/api/character/all')
+    fetch('http://localhost:8080/character/all')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao receber os dados.');

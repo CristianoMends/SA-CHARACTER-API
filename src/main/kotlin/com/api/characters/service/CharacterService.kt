@@ -1,5 +1,6 @@
 package com.api.characters.service
 
+import com.api.characters.dto.CharacterDto
 import com.api.characters.entity.Character
 import com.api.characters.repository.CharacterRepository
 import org.springframework.core.io.Resource
@@ -40,7 +41,7 @@ class CharacterService(
             throw IOException("Failed to save image", e)
         }
 
-        val imageLink = "http://localhost:8080/api/character/image/$fileName"
+        val imageLink = "http://localhost:8080/character/image/$fileName"
         character.image = imageLink
 
         try {
@@ -67,4 +68,5 @@ class CharacterService(
         val characters = characterRepository.findAllCharacters()
         return characters
     }
+
 }

@@ -1,5 +1,6 @@
 package com.api.characters.service
 
+import com.api.characters.dto.CharacterDto
 import com.api.characters.entity.Character
 import com.api.characters.repository.CharacterRepository
 import org.springframework.web.multipart.MultipartFile
