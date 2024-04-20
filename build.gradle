@@ -51,7 +51,14 @@ jar {
 				'Main-Class': 'com.api.characters.SaCharactersApiApplicationKt'
 		)
 	}
+
+	dependsOn(configurations.runtimeClasspath)
+	from({
+		configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+	})
 }
+
+
 
 
 
